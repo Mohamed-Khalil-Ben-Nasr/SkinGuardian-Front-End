@@ -20,7 +20,8 @@ function App() {
     <>
     <AuthContext.Provider value={{ jwt, setJwt }}>
     <BrowserRouter>
-            <Navbar />
+           
+            {jwt !== '' && <Navbar />}
             <Routes>
               <Route path="/" element={<LogInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />

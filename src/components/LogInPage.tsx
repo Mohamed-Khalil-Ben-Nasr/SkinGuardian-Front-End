@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import logo from "../assets/skinguardian.png";
+
 
 // using react-hook-form + zod is so much better than using useRef()
 // because we make sure that all the inputs are controleld and their values are stored in react state vars
@@ -54,7 +56,7 @@ const LogInPage = () => {
 
   const handleLogin = async (user: {username :string, password: string}) => {
     try {
-      const response = await fetch("http://localhost:8085/user/login", {
+      const response = await fetch("http://localhost:8085/users/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
@@ -86,23 +88,24 @@ const LogInPage = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow">
-        <h2 className="mb-6 text-center text-2xl font-bold">Log In</h2>
+    <main className="flex flex-row min-h-screen w-full font-inter">
+      {/* Left half: Sign In Form */}
+      <div className="w-1/2 flex flex-col justify-center items-center bg-white p-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(loginAction)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(loginAction)}  className="w-full max-w-md space-y-4 bg-white p-8 rounded shadow">
+            <h2 className="text-3xl font-bold mb-6 text-center">Sign In</h2>
             <FormField
               control={form.control}
               // the name prop connects this form field to the username key in my form 
               name="username"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
+                <FormItem className="flex flex-col gap-1.5">
+                  <FormLabel className="font-medium text-gray-700">Username</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your username" {...field} />
                   </FormControl>
                   <FormDescription>This is your public display name.</FormDescription>
-                  <FormMessage />
+                  <FormMessage  className="text-sm text-red-500"/>
                 </FormItem>
               )}
             />
@@ -110,27 +113,35 @@ const LogInPage = () => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
+                <FormItem className="flex flex-col gap-1.5">
+                  <FormLabel className="font-medium text-gray-700">Password</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="Enter your password" {...field} />
                   </FormControl>
                   <FormDescription>Your account password.</FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Log In</Button>
+            <Button type="submit" className="w-full rounded-lg border border-transparent bg-blue-500 font-semibold text-white shadow">Log In</Button>
           </form>
         </Form>
         <p className="mt-4 text-center text-sm">
           Don't have an account?{" "}
-          <Link to="/sign-up" className="text-blue-600 hover:underline">
+          <Link to="/sign-up" className="cursor-pointer font-medium text-blue-500 hover:underline">
             Sign Up
           </Link>
         </p>
       </div>
-    </div>
+      {/* Right half: Logo */}
+      <div className="w-1/2 flex items-center justify-center">
+        <img
+          src={logo}
+          alt="SkinGuardian"
+          className="w-250 h-250"
+        />
+      </div>
+    </main>
   );
 }
 
