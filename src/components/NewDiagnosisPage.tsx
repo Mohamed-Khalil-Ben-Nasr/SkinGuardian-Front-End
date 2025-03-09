@@ -26,6 +26,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { diagnosisAdviceMapping } from '@/constants';
+
 
 const NewDiagnosisPage = () => {
   const {jwt, setJwt} = useContext(AuthContext)!;
@@ -166,6 +168,7 @@ const NewDiagnosisPage = () => {
         diagnosisResult && (
           <div className="mt-6 text-center text-xl font-bold text-green-600">
             <h1>Diagnosis: {diagnosisResult}</h1>
+            <p className="text-red-600">{diagnosisAdviceMapping[diagnosisResult]}</p>
           </div>
         )
       }

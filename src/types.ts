@@ -14,4 +14,17 @@ export interface Profile {
 export interface ProfileCardProps {
   profile: Profile;
 }
-  
+
+export interface Diagnosis {
+  diagnosisId: string;
+  userId: string;
+  sex: string;
+  age: number;
+  localization: string;
+  imageUrl: string;
+  diagnosisResult: string;
+}
+
+export interface DiagnosisCardProps {
+  diagnosis: Diagnosis;
+}

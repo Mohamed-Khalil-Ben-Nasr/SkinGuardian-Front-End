@@ -32,3 +32,13 @@ export const diagnosisFormSchema = z.object({
 
 export const localizations = ['abdomen','acral','back','chest','ear','face','foot','genital',  'hand','lower extremity','neck', 'scalp', 'trunk', 'unknown', 'upper extremity']
 
+
+export const diagnosisAdviceMapping: { [key: string]: string } = {
+  bkl: "For benign keratosis-like lesions (bkl), monitor changes and consult your dermatologist if you notice any alterations.",
+  nv: "Melanocytic nevi (nv) are common moles. Regular check-ups are recommended for any significant changes.",
+  df: "Dermatofibroma (df) is usually benign. However, if you experience discomfort or changes, get it checked.",
+  mel: "Melanoma (mel) is serious. Please consult a specialist immediately for further evaluation and treatment.",
+  vasc: "Vascular lesions (vasc) may require further investigation. Please consult with your healthcare provider.",
+  bcc: "Basal cell carcinoma (bcc) typically grows slowly. Early treatment can lead to better outcomes.",
+  akiec: "Actinic keratoses and intraepithelial carcinoma (akiec) need prompt attention. Please consult a dermatologist for advice."
+};
