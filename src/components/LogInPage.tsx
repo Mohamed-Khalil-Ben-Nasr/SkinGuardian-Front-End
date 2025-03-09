@@ -20,19 +20,13 @@ import {
 import { Input } from "@/components/ui/input";
 
 import logo from "../assets/skinguardian.png";
+import {User} from "../types";
 
 
 // using react-hook-form + zod is so much better than using useRef()
 // because we make sure that all the inputs are controleld and their values are stored in react state vars
 // behind the scenes and also zod provides validation
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+import { formSchema } from '@/constants';
 
 const LogInPage = () => {
   // authcontext is sure to be undefined since we provide it using the provider in app.tsx
@@ -47,14 +41,13 @@ const LogInPage = () => {
       password: "",
     }
   })
-
   
   const loginAction = async (data: z.infer<typeof formSchema>) => {
     // await the jwt to be returned from backend and update jwt state variable
     await handleLogin(data);
   };
 
-  const handleLogin = async (user: {username :string, password: string}) => {
+  const handleLogin = async (user: User) => {
     try {
       const response = await fetch("http://localhost:8085/users/login", {
         method: "POST",

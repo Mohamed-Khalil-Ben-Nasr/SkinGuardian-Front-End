@@ -18,15 +18,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {User} from "../types";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+import { formSchema } from '@/constants';
 
 const SignUpPage = () => {
   // authcontext is sure to be undefined since we provide it using the provider in app.tsx
@@ -47,7 +41,7 @@ const SignUpPage = () => {
     await handleSignUp(data);
   };
 
-  const handleSignUp = async (user: {username :string, password: string}) => {
+  const handleSignUp = async (user: User) => {
     try {
       const response = await fetch("http://localhost:8085/users", {
         method: "POST",
@@ -139,16 +133,6 @@ const SignUpPage = () => {
       </div>
     </main>
   );
-
-
-
-
-
-
-
-  return (
-    <div>SignUpPage</div>
-  )
 }
 
 export default SignUpPage
