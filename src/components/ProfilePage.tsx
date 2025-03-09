@@ -106,22 +106,21 @@ const ProfilePage = () => {
 
   // if the user didnt make a profile yet, we render a form to create a profile
   return (
-    <main className="flex flex-row min-h-screen w-full font-inter">
-      <div className="flex flex-col justify-center items-center bg-white p-8">
+    <main className="flex min-h-screen w-full items-center justify-center font-inter bg-gray-50">
+      <div className="w-full max-w-lg bg-white p-10 rounded-lg shadow-lg">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(createProfileAction)}  className="w-full max-w-md space-y-4 bg-white p-8 rounded shadow">
-            <h2 className="text-3xl font-bold mb-6 text-center">Create Profile</h2>
+          <form onSubmit={form.handleSubmit(createProfileAction)} className="space-y-6">
+            <h2 className="text-3xl font-bold text-center">Create Profile</h2>
             <FormField
               control={form.control}
-              // the name prop connects this form field to the username key in my form 
               name="fullname"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-1.5">
-                  <FormLabel className="font-medium text-gray-700">Fullname</FormLabel>
+                  <FormLabel className="font-medium text-gray-700">Full Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your fullname" {...field} />
+                    <Input placeholder="Enter your full name" {...field} />
                   </FormControl>
-                  <FormMessage  className="text-sm text-red-500"/>
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
@@ -134,7 +133,7 @@ const ProfilePage = () => {
                   <FormControl>
                     <Input placeholder="Enter your email" {...field} />
                   </FormControl>
-                  <FormMessage  className="text-sm text-red-500"/>
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
@@ -147,22 +146,33 @@ const ProfilePage = () => {
                   <FormControl>
                     <Input placeholder="Enter your phone number" {...field} />
                   </FormControl>
-                  <FormMessage  className="text-sm text-red-500"/>
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="age"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-1.5">
-                  <FormLabel className="font-medium text-gray-700">Age</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="Enter your age" {...field} />
-                  </FormControl>
-                  <FormMessage  className="text-sm text-red-500"/>
-                </FormItem>
-              )}
+              render={({ field }) => {
+                const { onChange, ...restField } = field;
+                return (
+                  <FormItem className="flex flex-col gap-1.5">
+                    <FormLabel className="font-medium text-gray-700">Age</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Enter your age"
+                        {...restField}
+                        onChange={(e) => {
+                          const value = Number(e.target.value);
+                          onChange(value);
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-sm text-red-500" />
+                  </FormItem>
+                );
+              }}
             />
             <FormField
               control={form.control}
@@ -173,11 +183,13 @@ const ProfilePage = () => {
                   <FormControl>
                     <Input placeholder="Enter your sex" {...field} />
                   </FormControl>
-                  <FormMessage  className="text-sm text-red-500"/>
+                  <FormMessage className="text-sm text-red-500" />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full rounded-lg border border-transparent bg-blue-500 font-semibold text-white shadow">Create Profile</Button>
+            <Button type="submit" className="w-full rounded-lg bg-blue-500 font-semibold text-white shadow">
+              Create Profile
+            </Button>
           </form>
         </Form>
       </div>

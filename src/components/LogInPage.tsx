@@ -37,7 +37,7 @@ const LogInPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues:{
-      username: "",
+      name: "",
       password: "",
     }
   })
@@ -49,6 +49,7 @@ const LogInPage = () => {
 
   const handleLogin = async (user: User) => {
     try {
+      console.log(user);
       const response = await fetch("http://localhost:8085/users/login", {
         method: "POST",
         body: JSON.stringify(user),
@@ -90,7 +91,7 @@ const LogInPage = () => {
             <FormField
               control={form.control}
               // the name prop connects this form field to the username key in my form 
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-1.5">
                   <FormLabel className="font-medium text-gray-700">Username</FormLabel>

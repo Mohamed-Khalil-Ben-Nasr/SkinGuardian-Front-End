@@ -1,4 +1,4 @@
-import React, { useContext, FormEvent } from 'react'
+import React, { useContext} from 'react'
 import AuthContext from '../AuthContext'
 import NewDiagnosisPage from './NewDiagnosisPage';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,7 +31,7 @@ const SignUpPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues:{
-      username: "",
+      name: "",
       password: "",
     }
   })
@@ -55,12 +55,14 @@ const SignUpPage = () => {
         const data = await response.text();
         console.log(data);
         confirmLogin(data);
+      } else if (response.status === 409) {
+        alert("User with this name already exists. Please choose a different username.");
       } else {
-        alert("Login failed");
+        alert("Sign Up failed");
       }
     } catch (error) {
       console.log(error);
-      alert("Login failed");
+      alert("Sign Up failed");
     }
   };
 
@@ -84,7 +86,7 @@ const SignUpPage = () => {
             <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-1.5">
                   <FormLabel className="font-medium text-gray-700">Username</FormLabel>
