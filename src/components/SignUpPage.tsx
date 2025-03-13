@@ -22,6 +22,8 @@ import {User} from "../types";
 
 import { formSchema } from '@/constants';
 
+import { apiUrl } from '@/constants';
+
 const SignUpPage = () => {
   // authcontext is sure to be undefined since we provide it using the provider in app.tsx
   // that is why we use non-null assertion
@@ -43,7 +45,7 @@ const SignUpPage = () => {
 
   const handleSignUp = async (user: User) => {
     try {
-      const response = await fetch("http://localhost:8085/users", {
+      const response = await fetch(`${apiUrl}/users`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: {

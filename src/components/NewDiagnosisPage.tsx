@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select"
 
 import { diagnosisAdviceMapping } from '@/constants';
+import { apiUrl } from '@/constants';
 
 
 const NewDiagnosisPage = () => {
@@ -85,7 +86,7 @@ const NewDiagnosisPage = () => {
     );
 
     try {
-      const response = await fetch("http://localhost:8085/diagnosis", {
+      const response = await fetch(`${apiUrl}/diagnosis`, {
         method: "POST",
         // Let the browser set the Content-Type (with boundary) automatically
         body: formData,

@@ -22,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import logo from "../assets/skinguardian.png";
 import {User} from "../types";
 
+import { apiUrl } from '@/constants';
+
 
 // using react-hook-form + zod is so much better than using useRef()
 // because we make sure that all the inputs are controleld and their values are stored in react state vars
@@ -50,7 +52,7 @@ const LogInPage = () => {
   const handleLogin = async (user: User) => {
     try {
       console.log(user);
-      const response = await fetch("http://localhost:8085/users/login", {
+      const response = await fetch(`${apiUrl}/users/login`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: {

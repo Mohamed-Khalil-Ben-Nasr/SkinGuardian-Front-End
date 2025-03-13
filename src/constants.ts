@@ -42,3 +42,5 @@ export const diagnosisAdviceMapping: { [key: string]: string } = {
   bcc: "Basal cell carcinoma (bcc) typically grows slowly. Early treatment can lead to better outcomes.",
   akiec: "Actinic keratoses and intraepithelial carcinoma (akiec) need prompt attention. Please consult a dermatologist for advice."
 };
+
+export const apiUrl = process.env.REACT_APP_API_URL;

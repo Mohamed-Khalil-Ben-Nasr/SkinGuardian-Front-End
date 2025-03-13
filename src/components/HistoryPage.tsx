@@ -2,6 +2,7 @@ import React, { useContext, FormEvent, useState, useEffect } from 'react'
 import AuthContext from '../AuthContext'
 import { Diagnosis } from '@/types';
 import DiagnosisCard from './DiagnosisCard';
+import { apiUrl } from '@/constants';
 
 const HistoryPage = () => {
   const {jwt, setJwt} = useContext(AuthContext)!;
@@ -14,9 +15,10 @@ const HistoryPage = () => {
   }, [jwt]);
 
   const getDiagnoses = async () => {
+    console.log(apiUrl);
     const headers = { "Authorization": `Bearer ${jwt}` };
     try {
-      const response = await fetch("http://localhost:8085/users/diagnoses", { 
+      const response = await fetch(`${apiUrl}/users/diagnoses`, { 
         method: "GET", 
         headers 
       });

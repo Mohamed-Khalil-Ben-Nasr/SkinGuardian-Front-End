@@ -26,6 +26,8 @@ import { profileFormSchema } from '@/constants';
 // its good practice to define interface in types.ts for objects that we pass to functions
 import { Profile } from '@/types';
 
+import { apiUrl } from '@/constants';
+
 // this is the create profile page
 const ProfilePage = () => {
   // authcontext is sure to be undefined since we provide it using the provider in app.tsx
@@ -43,7 +45,7 @@ const ProfilePage = () => {
   const getProfile = async () => {
     const headers = { "Authorization": `Bearer ${jwt}` };
     try {
-      const response = await fetch("http://localhost:8085/users/profile", { 
+      const response = await fetch(`${apiUrl}/users/profile`, { 
         method: "GET", 
         headers 
       });
@@ -77,7 +79,7 @@ const ProfilePage = () => {
         "Content-type": "application/json; charset=UTF-8"
     };
 
-    fetch("http://localhost:8085/users/profile", {
+    fetch(`${apiUrl}/users/profile`, {
         method: "POST",
         body: JSON.stringify(profile),
         headers
