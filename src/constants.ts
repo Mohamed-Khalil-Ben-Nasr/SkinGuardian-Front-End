@@ -43,4 +43,5 @@ export const diagnosisAdviceMapping: { [key: string]: string } = {
   akiec: "Actinic keratoses and intraepithelial carcinoma (akiec) need prompt attention. Please consult a dermatologist for advice."
 };
 
-export const apiUrl = process.env.REACT_APP_API_URL;
+// vite uses import.meta.env to read .env vars
+export const apiUrl = import.meta.env.VITE_API_URL;
